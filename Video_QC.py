@@ -4,7 +4,7 @@ import re
 import sys
 def frames_to_timecode(frame_count, fps):
     total_seconds = frame_count / fps
-    hours = 0
+    hours = int(total_seconds // 3600)
     total_seconds %= 3600
     minutes = int(total_seconds // 60)
     seconds = int(total_seconds % 60)
