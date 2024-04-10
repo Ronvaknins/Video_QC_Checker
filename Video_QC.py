@@ -1,6 +1,7 @@
 import cv2
 from tqdm import tqdm
 import re
+import sys
 def frames_to_timecode(frame_count, fps):
     total_seconds = frame_count / fps
     hours = 0
@@ -54,13 +55,13 @@ def calculate_scene_frame_counts(video_file):
         if correlation < hist_threshold:
             if(frame_count_in_scene < fps-10):
                 tc = frames_to_timecode(frame_num,fps)
-                f.write("TC Short scene: "+tc+"\n")
+                f.write("Short Scene,{0}\n".format(tc))
                 short_scene_tc.append(tc)
 
             frame_count_in_scene = 1
             if is_frame_all_black(frame):
                 
-                f.write("Black at TC: "+frames_to_timecode(frame_num,fps)+"\n")
+                f.write("Black Frame,{0}\n".format(frames_to_timecode(frame_num,fps)))
                 print("Black at TC: {0}".format(frames_to_timecode(frame_num,fps)))
         else:
             frame_count_in_scene += 1
@@ -79,13 +80,14 @@ def calculate_scene_frame_counts(video_file):
 
 # Close the file
 
-video_file = './NAM_Blacks_detect_test.mxf'
-matches = re.findall(r'/([^/.]+)\.', video_file)
+video_file = sys.argv[1]
+print(video_file)
+matches = re.search(r'\\([^\\]+)\.(\w+)$', video_file)
 
 # Example usage
-file_path = matches[-1]+".vqc"
+file_path = matches.group(1)+".csv"
 f = open(file_path, 'w')
-
+f.write("Type,TC\n")
 scene_frame_counts = calculate_scene_frame_counts(video_file)
 print("TC of scence detected less then one frame:", scene_frame_counts)
 f.close()
