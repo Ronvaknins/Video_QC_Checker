@@ -62,7 +62,7 @@ def calculate_scene_frame_counts(video_file):
             if is_frame_all_black(frame):
                 
                 f.write("Black Frame,{0}\n".format(frames_to_timecode(frame_num,fps)))
-                print("Black at TC: {0}".format(frames_to_timecode(frame_num,fps)))
+                ##print("Black at TC: {0}".format(frames_to_timecode(frame_num,fps)))
         else:
             frame_count_in_scene += 1
 
@@ -85,11 +85,13 @@ print(video_file)
 matches = re.search(r'\\([^\\]+)\.(\w+)$', video_file)
 
 # Example usage
+# creat csv file
 file_path = matches.group(1)+".csv"
 f = open(file_path, 'w')
+#creating the CSV file headers
 f.write("Type,TC\n")
-scene_frame_counts = calculate_scene_frame_counts(video_file)
-print("TC of scence detected less then one frame:", scene_frame_counts)
+calculate_scene_frame_counts(video_file)
+#print("TC of scence detected less then one frame:", scene_frame_counts)
 f.close()
 # Open a file in write mode (creates a new file if it doesn't exist)
 
