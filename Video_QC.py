@@ -3,7 +3,7 @@ from tqdm import tqdm
 import re
 def frames_to_timecode(frame_count, fps):
     total_seconds = frame_count / fps
-    hours = 1
+    hours = 0
     total_seconds %= 3600
     minutes = int(total_seconds // 60)
     seconds = int(total_seconds % 60)
