@@ -1,5 +1,6 @@
 # Video_QC_Checker
 Video Quality Control 
+
 checks for:
 - [x] Short Scene Cut (less then [fps - 5] - you can change this threshold)
 - [x] Black frames (full black pixels)
