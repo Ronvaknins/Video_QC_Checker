@@ -85,7 +85,7 @@ print(video_file)
 matches = re.search(r'\\([^\\]+)\.(\w+)$', video_file)
 
 # Example usage
-# creat csv file
+# create csv file
 file_path = matches.group(1)+".csv"
 f = open(file_path, 'w')
 #creating the CSV file headers
